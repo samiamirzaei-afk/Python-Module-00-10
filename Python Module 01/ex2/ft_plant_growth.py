@@ -8,17 +8,18 @@ class Plant:
 # condition = 0: only plant info, 1: day 2: week
     def show(self, condition: int, date: int, result: float) -> None:
         if condition == 1:
-            print(f"* * *Day {date}* * *")
-        print(f"{self.name}: {self.height}cm, {self.old} days old")
+            print(f"=== Day {date}===")
+        if(condition != 2):
+            print(f"{self.name}: {round(self.height, 2)}cm, {self.old} days old")
         if condition == 2:
-            print(f"* * *Growth this week:{result} * * *")
+            print(f"=== Growth this week:{round(result, 2)}cm ===")
 
     def grow(self) -> None:
         self.height *= self.growth_multi
 
     def age(self, time: int) -> None:
         old_hight = self.height;
-        for x in range(1, time):
+        for x in range(1, time + 1):
             self.old += 1
             self.grow()
             self.show(1, x, 0)
@@ -33,6 +34,9 @@ if __name__ == "__main__":
     p2 = Plant("radis", 4.0, 3, 1.23)
     p3 = Plant("jalapeno", 40.0, 30, 1.12)
 
+    print("=== Garden Plant Growth ===")
     p1.age(7)
-#   p2.age(7)
-#   p3.age(7)
+    print("\n")
+    p2.age(7)
+    print("\n")
+    p3.age(7)
