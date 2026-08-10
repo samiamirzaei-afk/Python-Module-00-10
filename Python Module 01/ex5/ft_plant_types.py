@@ -56,67 +56,81 @@ class Plant:
     def age(self) -> None:
         self._old += 1
 
+
 class Flower(Plant):
     def __init__(self, name: str, height: float, old: int,
-            growth_multi: float, color: str) -> None:
+                 growth_multi: float, color: str) -> None:
         super().__init__(name, height, old, growth_multi)
         self._color = color
 
     def bloom(self) -> None:
         if(self._old < 20):
             print("%s is too young to bloom!, needs %d days" % (
-                self._name ,20 - self._old))
+                self._name, 20 - self._old))
         else:
             print("%s is blooming %s" % (self._name, self._color))
 
     def show(self) -> None:
         super().show()
         print("Color: %s" % (self._color))
-    
-Class Tree(Plant):
+
+
+class Tree(Plant):
     def __init__(self, name: str, height: float, old: int,
-            growth_multi: float, trunk_diameter: float) -> None:
+                 growth_multi: float, trunk_diameter: float) -> None:
         super().__init__(name, height, old, growth_multi)
-        self._trunk_diameter = trunk_diameter
+        self.trunk_diameter = trunk_diameter
 
     def show(self) -> None:
         super().show()
-        print("Trunk diameter: %.2fcm" % (trunk_diameter))
+        print("Trunk diameter: %.2fcm" % (self.trunk_diameter))
 
     def produce_shade(self):
         print("%s creates a shadow of %.2fcm², (h:%.2f, w:%.2f)" % (
-            self._name, (self._height * self._trunk_diameter), self._height,
-            self._trunk_diameter))
+            self._name, (self._height * self.trunk_diameter), self._height,
+            self.trunk_diameter))
+
+    def grow(self):
+        super().grow()
+        self.trunk_diameter += 0.4
+
 
 class Vegetable(Plant):
     def __init__(self, name: str, height: float, old: int,
-            growth_multi: float, harvest_season: str) -> None:
+                 growth_multi: float, harvest_season: str) -> None:
         super().__init__(name, height, old, growth_multi)
         self._harvest_season = harvest_season
         self._nutritional_value = 0
 
     def show(self) -> None:
         super().show()
-        printf("Harevest season: %s)" % (self._harvest_season)
-        printf("Nutritional value: %d)" % (self._nutritional_value)
+        print("Harevest season: %s)" % (self._harvest_season))
+        print("Nutritional value: %d)" % (self._nutritional_value))
 
     def age(self) -> None:
         super().age()
         self._nutritional_value += 1
 
     def grow(self) -> None:
-        super().age()
+        super().grow()
         self._nutritional_value += 1
+
 
 # name: str, height: float-cm, old: int-days, growth_multi : float) -> None:
 if __name__ == "__main__":
     p1 = Flower("rosemary", 10.0, 5, 1.04, "purple")
-    p2 = Tree
-    p1.show()
-    p1.bloom()
+    p2 = Tree("Oak", 40.5, 85, 1.11, 2.22)
+    p3 = Vegetable("tomato", 20.5, 85, 1.14, "Summer")
     x = 1
-    for x in range(x , 30):
-        p1.age()
-        p1.bloom()
+#    for x in range(x , 30):
+#        p2.grow()
+#        p2.age
+#        p2.produce_shade()
+#        p2.show()
+#        print()
 
-
+    for x in range(x, 30):
+        p3.grow()
+        p3.age()
+        p3.show()
+        print()
