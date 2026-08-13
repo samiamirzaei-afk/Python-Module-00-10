@@ -1,3 +1,74 @@
+here is some instruction as to what should be done:
+
+"•Authorized: super(), print(), range(), round(), staticmethod(), classmethod()
+Enhance your classes from the previous exercise to display analytics. You will need to
+handle complex data relationships, use nested components and inheritance chains.
+Requirements:
+• Create a static method for the Plant class that checks if a specific age given as a
+parameter is older than a year.
+• Create a class method that allows you to create an “anonymous” plant directly
+when you do not yet have all the information.
+• Create a Seed class that inherits from Flower, and holds the number of seeds once
+the flower has bloomed. The show() method must be improved accordingly.
+• Each Plant has an internal system, implemented as a nested class, that holds
+statistical data: number of grow() calls, number of age() calls, number of show()
+calls. Encapsulation is required, as well as a display function.
+• Trees need an extra piece of statistical data: number of produce_shade() calls.
+• Finally, create a unique function, not part of any class, that displays statistics for
+any kind of plant.
+Note: the decorator syntax is also accepted for static and class
+methods
+Example:
+```text
+$> python3 ft_garden_analytics.py
+=== Garden statistics ===
+=== Check year-old
+Is 30 days more than a year? -> False
+Is 400 days more than a year? -> True
+=== Flower
+Rose: 15.0cm, 10 days old
+Color: red
+Rose has not bloomed yet
+[statistics for Rose]
+Stats: 0 grow, 0 age, 1 show
+[asking the rose to grow and bloom]
+Rose: 23.0cm, 10 days old
+Color: red
+Rose is blooming beautifully!
+[statistics for Rose]
+Stats: 1 grow, 0 age, 2 show
+=== Tree
+Oak: 200.0cm, 365 days old
+Trunk diameter: 5.0cm
+[statistics for Oak]
+Stats: 0 grow, 0 age, 1 show
+0 shade
+[asking the oak to produce shade]
+Tree Oak now produces a shade of 200.0cm long and 5.0cm wide.
+[statistics for Oak]
+Stats: 0 grow, 0 age, 1 show
+1 shade
+=== Seed
+Sunflower: 80.0cm, 45 days old
+Color: yellow
+Sunflower has not bloomed yet
+Seeds: 0
+[make sunflower grow, age and bloom]
+Sunflower: 110.0cm, 65 days old
+Color: yellow
+Sunflower is blooming beautifully!
+Seeds: 42
+[statistics for Sunflower]
+Stats: 1 grow, 1 age, 2 show
+=== Anonymous
+Unknown plant: 0.0cm, 0 days old
+[statistics for Unknown plant]
+Stats: 0 grow, 0 age, 1 show
+```
+"
+
+and here is the code to work with
+```py
 class Plant:
     def __init__(self, name: str, height: float, old: int,
                  growth_multi: float) -> None:
@@ -119,7 +190,6 @@ class Vegetable(Plant):
         self._nutritional_value += 1
 
 
-# name: str, height: float-cm, old: int-days, growth_multi : float) -> None:
 if __name__ == "__main__":
     p1 = Flower("rosemary", 10.0, 19, 1.04, "purple")
     p2 = Tree("dark Oak", 40.5, 85, 1.11, 2.22)
@@ -149,3 +219,4 @@ if __name__ == "__main__":
         p3.age()
         p3.show()
         print()
+```
