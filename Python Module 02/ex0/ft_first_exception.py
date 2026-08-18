@@ -1,4 +1,6 @@
 def input_temperature(temp_str: str) -> int:
+    return int(temp_str)
+    '''
     result = 0
     try:
         result = int(temp_str)
@@ -6,22 +8,28 @@ def input_temperature(temp_str: str) -> int:
         print(f"\"{temp_str}\" is not a valid input "
               "please only give whole numbers, setting value to 0")
     return result
-
+    '''
 
 def test_temperature() -> None:
     print("tesing 30")
-    result = input_temperature("30")
-    print(f"temp is {result}C\n")
-
-    print("testing mnba")
-    result = input_temperature("mnba")
-    print(f"temp is {result}C\n")
-
-    print("testing 1.3")
-    result = input_temperature("1.3")
-    print(f"temp is {result}C\n")
+    test = 30
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except (TypeError, ValueError):
+        print(f"\"{test}\" is not a valid input "
+              "please only give whole numbers, setting value to 0")
+    
+    print("testing abc")
+    test = "abc"
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except (TypeError, ValueError):
+        print(f"\"{test}\" is not a valid input "
+              "please only give whole numbers, setting value to 0")
 
 
 if __name__ == "__main__":
     test_temperature()
-    print("End")
+    print("*** End of program ***")

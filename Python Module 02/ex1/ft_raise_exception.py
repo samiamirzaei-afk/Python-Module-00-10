@@ -1,41 +1,44 @@
 def input_temperature(temp_str: str) -> int:
-    result = 0
-    try:
-        result = int(temp_str)
-    except (TypeError, ValueError):
-        print(f"\"{temp_str}\" is not a valid input, please provide"
-              "only whole numbers, setting result to 0")
+    result = int(temp_str)
     if result > 40:
-        print(f"{result}C is too hot!, please double-check your result. "
-              "setting result to 40 which is the max value")
-        result = 40
-        return result
-    if result < 0:
-        print(f"{result}C is too cold!, please double-check your result. "
-              "setting result to 0 which is the min value")
+        raise ValueError(f"{result} is larger than 40, use a smaller number")
+    elif result < 0:
+        raise ValueError(f"{result} is smaller than 0, use a smaller number")
     return result
 
 
 def test_temperature() -> None:
     print("tesing 30")
-    result = input_temperature("30")
-    print(f"temp is {result}C\n")
+    test = "30"
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except Exception as e:
+        print(e)
 
-    print("testing mnba")
-    result = input_temperature("mnba")
-    print(f"temp is {result}C\n")
-
-    print("testing 1.3")
-    result = input_temperature("1.3")
-    print(f"temp is {result}C\n")
+    print("testing abc")
+    test = "abc"
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except Exception as e:
+        print(e)
 
     print("testing 100")
-    result = input_temperature("100")
-    print(f"temp is {result}C\n")
+    test = "100"
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except ValueError as e:
+        print(e)
 
-    print("testing -50")
-    result = input_temperature("-50")
-    print(f"temp is {result}C\n")
+    print("testing 100")
+    test = "-50"
+    try:
+        result = input_temperature(test)
+        print(f"temp is {result}C\n")
+    except ValueError as e:
+        print(e)
 
 
 if __name__ == "__main__":
