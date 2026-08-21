@@ -2,7 +2,7 @@ def input_temperature(temp_str: str) -> int:
     result = int(temp_str)
     if result > 40:
         raise ValueError(f"{result} is larger than 40, use a smaller number")
-    elif result < 0:
+    if result < 0:
         raise ValueError(f"{result} is smaller than 0, use a smaller number")
     return result
 
