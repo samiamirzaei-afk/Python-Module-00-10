@@ -10,6 +10,7 @@ def is_number(value: int) -> bool:
 def main(argc: int) -> int:
     if(argc < 2):
         print("No score given, Use: python3.11 ft_score_analytics.py score1 score2 score3...")
+        return(1)
     print("=== Score tab ===")
     
     argv = sys.argv

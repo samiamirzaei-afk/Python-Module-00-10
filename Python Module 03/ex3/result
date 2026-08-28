@@ -1,0 +1,12 @@
+claude={'Hot Stuff', 'Free the End', 'Enchanter', 'Acquire Hardware', 'The End', 'Top Notch', 'Suit Up', 'Into Fire', 'Stone Age', 'Minecraft', 'Nether'},
+ total of 11
+chatgpt={'Enchanter', 'Getting Wood', 'Top Notch', 'Suit Up', 'Into Fire', 'Stone Age', 'Local Brewery'},
+ total of 7
+kimi={'Acquire Hardware', 'Take Aim', 'DIAMONDS', 'Suit Up', 'Local Brewery'},
+ total of 5
+deepseek={'Getting Wood', 'Into Fire', 'Acquire Hardware'},
+ total of 3
+achievements=['Getting Wood', 'Minecraft', 'Stone Age', 'Acquire Hardware', 'Suit Up', 'Take Aim', 'Hot Stuff', 'DIAMONDS', 'Nether', 'Into Fire', 'Local Brewery', 'The End', 'Free the End', 'Enchanter', 'Top Notch'],
+ total of 15
+common achievements:set()
+claude_only={'Hot Stuff', 'Free the End', 'The End', 'Minecraft', 'Nether'}
