@@ -2,6 +2,6 @@ def ft_plant_age() -> None:
     harvest_time = 60
     age = int(input("Enter plant age in days: "))
     if (age > harvest_time):
-        print("Plant is ready for harvest!")
+        print("Plant is ready to harvest!")
         return None
-    print("Plant needs more time")
+    print("Plant needs more time to grow")
