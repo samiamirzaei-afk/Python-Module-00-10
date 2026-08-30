@@ -22,6 +22,7 @@ if __name__ == "__main__":
     p3 = Plant("jalapeno", 40.0, 30, 1.12)
 
     start_height = p3.height
+    p3.show()
     print("=== Garden Plant Growth ===")
     for x in range(1, 7 + 1):
         print(f"=== Day{x} ===")

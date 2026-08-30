@@ -2,6 +2,7 @@ main.py
 *.swp
 en.subject.pdf
 exam_mode/
+task.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

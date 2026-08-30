@@ -4,8 +4,8 @@ class Plant:
         self._name = name.capitalize()
         self._height = 0.0
         self._old = 0
-        self.set_height_start(height)
-        self.set_age_start(old)
+        self.set_height(height)
+        self.set_age(old)
         self._growth_multi = growth_multi
 
     def get_age(self) -> int:
@@ -20,13 +20,6 @@ class Plant:
         self._old = num
         print("Age updated to %d days old" % (self._old))
 
-    def set_age_start(self, num: int) -> None:
-        if(num < 0):
-            print(f"{self._name}: Error, age can not be a negative")
-            print("Age updated rejected")
-            return
-        self._old = num
-
     def get_height(self) -> float:
         pub_height = self._height
         return(pub_height)
@@ -38,13 +31,6 @@ class Plant:
             return
         self._height = num
         print("Height updated to %.2fcm" % (self._height))
-
-    def set_height_start(self, num: float) -> None:
-        if(num < 0):
-            print(f"{self._name}: Error, height can not be a negative")
-            print("height updated rejected")
-            return
-        self._height = num
 
     def show(self) -> None:
         print("%s: %.2fcm, %d days old" % (
@@ -125,10 +111,11 @@ if __name__ == "__main__":
     p2 = Tree("dark Oak", 40.5, 85, 1.11, 2.22)
     p3 = Vegetable("tomato", 20.5, 85, 1.14, "Summer")
 
-    print("== Flower")
+    print("\n\n== Flower")
     p1.show()
     p1.bloom()
     p1.age()
+    print("*** calling age() ***")
     p1.bloom()
     p1.show()
 
@@ -137,6 +124,7 @@ if __name__ == "__main__":
     print()
     for x in range(0, 2):
         p2.grow()
+        print("*** calling grow() ***")
         p2.produce_shade()
         p2.show()
         print("")
@@ -147,5 +135,6 @@ if __name__ == "__main__":
     for x in range(0, 5):
         p3.grow()
         p3.age()
+        print("*** calling grow() and age() ***")
         p3.show()
         print()

@@ -20,7 +20,8 @@ class Plant:
         def age_call(self) -> None:
             self.__age_count += 1
 
-    def __init__(self, name: str, height: float, old: int, growth_multi: float) -> None:
+    def __init__(self, name: str, height: float, old: int,
+                 growth_multi: float) -> None:
         self._name = name.capitalize()
         self._height = 0.0
         self._old = 0
@@ -68,7 +69,8 @@ class Plant:
         self._height = num
 
     def show(self) -> None:
-        print("%s: %.2fcm, %d days old" % (self._name, self._height, self._old))
+        print("%s: %.2fcm, %d days old" %
+              (self._name, self._height, self._old))
         self.stats.show_call()
 
     def grow(self) -> None:
@@ -89,9 +91,8 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(
-        self, name: str, height: float, old: int, growth_multi: float, color: str
-    ) -> None:
+    def __init__(self, name: str, height: float, old: int,
+                 growth_multi: float, color: str) -> None:
         super().__init__(name, height, old, growth_multi)
         self._color = color
         self._bloom = False
@@ -163,7 +164,7 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, old, growth_multi)
         self.trunk_diameter = trunk_diameter
-        self.stats = self.Stats()
+        self.stats: Tree.Stats = self.Stats()
 
     def show(self) -> None:
         super().show()

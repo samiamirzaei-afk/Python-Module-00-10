@@ -27,3 +27,7 @@ if __name__ == "__main__":
     p5 = Plant("garlic", 3.0, 12, 1.02)
 
     p1.show()
+    p2.show()
+    p3.show()
+    p4.show()
+    p5.show()
