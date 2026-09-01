@@ -1,7 +1,11 @@
+smart_result.txt                                                                             
+spec.txt                                                                                     
 main.py
+output.txt
 *.swp
 en.subject.pdf
 exam_mode/
+.exam_mode/
 task.txt
 
 # Byte-compiled / optimized / DLL files
