@@ -15,7 +15,9 @@ def parse(raw: str) -> tuple[bool, float, float, float]:
         print("invalid syntax, example of correct syntax: <1, 3, 4>")
         return(False, 0, 0, 0)
     return (True, x1, y1, z1)
-
+    '''
+    remove one of the try-blocks
+    '''
 
 def main() -> int:
     print("=== Game Coordinate System ===")
@@ -27,7 +29,7 @@ def main() -> int:
     print(f"Coordinates of Player one:({x=}, {y=}, {z=})")
 
     center_dis = math.sqrt((x-0)**2 + (y-0)**2 + (z-0)**2)
-    print(f"Player one's distance from the center: {round(math_result, 2)}")
+    print(f"Player one's distance from the center: {round(center_dis, 2)}")
 
     while 1:
         raw1 = input("Enter Player two's x, y, z coordinates please: ")
@@ -38,6 +40,7 @@ def main() -> int:
     math_result = math.sqrt((x2-x)**2 + (y2-y)**2 + (z2-z)**2)
     print(f"Player two's distance from Plater one: {round(math_result, 2)}")
     return (0)
+
 
 if __name__ == "__main__":
     _ = main()

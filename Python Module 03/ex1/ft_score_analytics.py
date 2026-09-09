@@ -1,18 +1,21 @@
 import sys
 
-def is_number(value: int) -> bool:
+
+def is_number(value: str) -> bool:
     try:
         _ = int(value)
         return True
     except(TypeError, ValueError):
         return False
 
+
 def main(argc: int) -> int:
     if(argc < 2):
-        print("No score given, Use: python3.11 ft_score_analytics.py score1 score2 score3...")
+        print("No score given, Use: python3.11"
+              " ft_score_analytics.py score1 score2 score3...")
         return(1)
     print("=== Score tab ===")
-    
+
     argv = sys.argv
     score_list = []
     j = 1
@@ -30,15 +33,15 @@ def main(argc: int) -> int:
     print(f"smallest score: {min(score_list)}")
     print(f"avrage score: {(sum(score_list) / len(score_list))}")
     print(f"range score: {(max(score_list) - min(score_list))}")
+    return(0)
 
-
-
-
-    ''' 
+    '''
     temp = score_list.__sizeof__()
     print(score_list)
     print(f"{temp}")
     '''
+
+
 if __name__ == "__main__":
     argc = len(sys.argv)
     main(argc)

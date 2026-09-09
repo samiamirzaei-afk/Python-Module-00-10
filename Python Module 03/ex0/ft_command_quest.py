@@ -1,5 +1,6 @@
 import sys
 
+
 def main() -> int:
 
     i = 1
@@ -10,10 +11,9 @@ def main() -> int:
     while i < argc:
         print(f"argument {i}:", sys.argv[i])
         i += 1
-
     print(f"total argc: {argc}")
-    
+    return(0)
+
 
 if __name__ == "__main__":
     _ = main()
-
