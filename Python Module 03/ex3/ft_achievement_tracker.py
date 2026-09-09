@@ -50,7 +50,7 @@ def main() -> int:
     print(f"{chatgpt_missing=}")
     print(f"{deepseek_missing=}")
     print(f"{kimi_missing=}\n")
-    return(1)
+    return (1)
 
 
 if __name__ == "__main__":

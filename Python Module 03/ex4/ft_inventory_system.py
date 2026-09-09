@@ -10,24 +10,24 @@ def arg_checker(inventory: dict[str, int], name: str, count: str) -> bool:
     if name.isdigit() is True:
         print(f"\"{name}:{count}\" is ignored (numbers as name Error)")
         return False
-    if name.strip() is None:
+    if name.strip() == "":
         print(f"\"{name}:{count}\" is ignored, (empty name Error)")
         return False
     if name in inventory:
         print(f"\"{name}:{count}\" is ignored, (duplicate name Error)")
         return False
-    return(True)
+    return (True)
 
 
 def main() -> int:
     argc = len(sys.argv)
-    if(argc < 2):
+    if (argc < 2):
         print("no arguments given, example of layout: <item_name:quantity>")
-        return(1)
+        return (1)
     inventory: dict[str, int] = dict()
     i = 1
 
-    while(i < argc):
+    while (i < argc):
         print(f"\nchecking:\"{sys.argv[i]}\".....")
         time.sleep(0.1)
         try:
@@ -48,11 +48,13 @@ def main() -> int:
     total_count = sum(inventory.values())
     print(f"{total_name} unique items, {total_count} items total")
 
-    for keys in inventory:
-        current = inventory[keys]
-        share = current * 100 / total_count
-        print(f"{keys} is {round(share, 1)}% of items")
-
+    try:
+        for keys in inventory:
+            current = inventory[keys]
+            share = current * 100 / total_count
+            print(f"{keys} is {round(share, 1)}% of items")
+    except ZeroDivisionError as e:
+        print(e)
     i = 0
     min_value = min(inventory.values())
     max_value = max(inventory.values())
@@ -69,7 +71,7 @@ def main() -> int:
     inventory.update({"gay": 100})
     print("updated inventory:")
     print(inventory)
-    return(0)
+    return (0)
 
 
 if __name__ == "__main__":

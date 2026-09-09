@@ -7,12 +7,13 @@ def main() -> int:
     argc = len(sys.argv)
     if argc < 2:
         print("please provice at least one argument")
+        print("total argc: 1")
         return (1)
     while i < argc:
         print(f"argument {i}:", sys.argv[i])
         i += 1
     print(f"total argc: {argc}")
-    return(0)
+    return (0)
 
 
 if __name__ == "__main__":

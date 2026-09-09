@@ -4,21 +4,40 @@ import math
 def parse(raw: str) -> tuple[bool, float, float, float]:
     try:
         x, y, z = raw.split(",")
-    except ValueError:
-        print("Invalid syntax, example of a valid syntax: <5, -10, 20.4,>")
-        return(False, 0, 0, 0)
-    try:
         x1 = float(x)
         y1 = float(y)
         z1 = float(z)
     except ValueError:
-        print("invalid syntax, example of correct syntax: <1, 3, 4>")
-        return(False, 0, 0, 0)
+        print("Invalid syntax, example of a valid syntax: <5, -10, 20.4>")
+        return (False, 0, 0, 0)
     return (True, x1, y1, z1)
-    '''
-    remove one of the try-blocks
-    '''
 
+
+def ft_input() -> tuple[float, float, float]:
+    while (1):
+        raw = input("Enter Player one's x, y, z coordinates please: ")
+        result, x, y, z = parse(raw)
+        if result is True:
+            return (x, y, z)
+
+
+def main() -> int:
+    print("=== Game Coordinate System ===")
+    x, y, z = ft_input()
+    print(f"Coordinates of Player one:({x=}, {y=}, {z=})")
+    center_dis = math.sqrt((x-0)**2 + (y-0)**2 + (z-0)**2)
+    print(f"Player one's distance from the center: {round(center_dis, 2)}")
+    x2, y2, z2 = ft_input()
+    print(f"Coordinates of Player two:({x2=}, {y2=}, {z2=})")
+    math_result = math.sqrt((x2-x)**2 + (y2-y)**2 + (z2-z)**2)
+    print(f"Player two's distance from Player one: {round(math_result, 2)}")
+    return (0)
+
+
+if __name__ == "__main__":
+    _ = main()
+
+'''
 def main() -> int:
     print("=== Game Coordinate System ===")
     while(1):
@@ -40,7 +59,4 @@ def main() -> int:
     math_result = math.sqrt((x2-x)**2 + (y2-y)**2 + (z2-z)**2)
     print(f"Player two's distance from Plater one: {round(math_result, 2)}")
     return (0)
-
-
-if __name__ == "__main__":
-    _ = main()
+'''
