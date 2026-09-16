@@ -3,10 +3,11 @@ import sys
 
 def argc_check(argc: int) -> bool:
     if (argc == 1):
-        print("please provide arguments (python ft_ancient_text.py file.txt)")
+        print("please provide arguments ",
+              "(python ft_ancient_text.py file.txt)", file=sys.stderr)
         return False
     if (argc != 2):
-        print("please only give one file")
+        print("please only give one file", file=sys.stderr)
         return False
     return True
 
@@ -52,6 +53,7 @@ def main() -> int:
             temp.write(line)
     except (PermissionError) as e:
         print(e, file=sys.stderr)
+        return (0)
     print("file saved as", save_name)
     temp.close()
     return (0)

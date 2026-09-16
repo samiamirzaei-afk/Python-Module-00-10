@@ -51,8 +51,8 @@ def main() -> int:
             new.write(line)
     except (PermissionError) as e:
         print(e)
+        return (1)
     new.close()
-
     return (0)
 
 
