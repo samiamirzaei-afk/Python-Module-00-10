@@ -40,7 +40,7 @@ def main() -> int:
     read_n_clone(full_lines)
     print("\n\ndone!")
     f.close()
-    
+
     save_name = input("enter file name:(leave empty to ignore): ")
     if save_name == "":
         print("no name was given, deleting file")

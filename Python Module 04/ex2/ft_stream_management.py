@@ -1,5 +1,6 @@
 import sys
 
+
 def argc_check(argc: int) -> bool:
     if (argc == 1):
         print("please provide arguments (python ft_ancient_text.py file.txt)")
@@ -22,6 +23,7 @@ def read_n_clone(full_lines: list[str]) -> list[str]:
     for line in full_lines:
         print(line, end="")
     return (full_lines)
+
 
 def main() -> int:
     argc = len(sys.argv)
@@ -53,7 +55,6 @@ def main() -> int:
     print("file saved as", save_name)
     temp.close()
     return (0)
-
 
 
 if __name__ == "__main__":

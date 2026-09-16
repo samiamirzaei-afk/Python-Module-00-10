@@ -20,10 +20,10 @@ def secure_archive(argv: str, option: int) -> tuple[bool, str]:
                 with open("archive.txt", mode) as f2:
                     f2.write(content)
                     f2.write("###archive text###")
-                    return(True, "content wrote in file \"archive.txt\"")
-            return(True, content)
+                    return (True, "content wrote in file \"archive.txt\"")
+            return (True, content)
     except (FileNotFoundError, PermissionError) as e:
-        return(False, str(e))
+        return (False, str(e))
 
 
 def main() -> int:

@@ -18,7 +18,7 @@ def main() -> int:
         return (1)
     try:
         f = open(sys.argv[1])
-    except PermissionError, FileNotFoundError) as e:
+    except (PermissionError, FileNotFoundError) as e:
         print(e)
         return (1)
 
