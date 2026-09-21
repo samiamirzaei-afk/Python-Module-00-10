@@ -253,15 +253,15 @@ def main() -> int:
                     {"name": "Charlie", "age": "35", "city": "Paris"},
                         ]
                 stream.process_stream(people_2)
-                people_3 = {"input_1": "test", "input_2": "test",
-                            "input_3": "test", "input_4": "test",
-                            "input_5": "test", "input_6": "test",
-                            "input_7": "test", "input_8": "test"}
+#                people_3 = {"input_1": "test", "input_2": "test",
+#                            "input_3": "test", "input_4": "test",
+#                            "input_5": "test", "input_6": "test",
+#                            "input_7": "test", "input_8": "test"}
 #                stream.process_stream(people_3)
-                people_4 = {"input_1": "test", "input_2": "test",
-                            "input_3": "test", "input_4": "test",
-                            "input_5": "test", "input_6": "test",
-                            "input_7": "test", "input_8": 1}
+#                people_4 = {"input_1": "test", "input_2": "test",
+#                            "input_3": "test", "input_4": "test",
+#                            "input_5": "test", "input_6": "test",
+#                            "input_7": "test", "input_8": 1}
 #                stream.process_stream(people_4)
                 stream.process_stream(big)
                 stream.process_stream(big1)

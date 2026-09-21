@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 from typing import Any, Protocol
 
 
+class ExportPlugin(Protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        ...
+
+
 class DataProcessor(ABC):
     def __init__(self) -> None:
         self.storage: list[str] = list()
@@ -19,7 +24,7 @@ class DataProcessor(ABC):
         self.current_op -= 1
         return self.index - 1, result
 
-    def input(self) -> None:
+    def ft_input(self) -> None:
         self.total_op += 1
         self.current_op += 1
 
@@ -45,7 +50,6 @@ class DataStream:
                 if proc.validate(item) is True:
                     proc.ingest(item)
                     print(item, "was added to", proc.__class__.__name__)
-                    proc.input()
                     break
                 else:
                     print(item, "does not fit into", proc.__class__.__name__)
@@ -58,6 +62,21 @@ class DataStream:
             name = proc.__class__.__name__
             print(f"{name}, {proc.total_op=}, {len(proc.storage)} left")
             print(f"{proc.storage}")
+
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        for proc in self.processor_list:
+            if len(proc.storage) < nb:
+                count = len(proc.storage)
+                if count == 0:
+                    return
+            else:
+                count = nb
+            batch = []
+            while count > 0:
+                result = proc.output()
+                batch.append(result)
+                count -= 1
+            plugin.process_output(batch)
 
 
 class NumericProcessor(DataProcessor):
@@ -89,8 +108,10 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, list):
             for section in data:
                 self.storage.append(str(section))
+                self.ft_input()
             return
         self.storage.append(str(data))
+        self.ft_input()
         return
 
 
@@ -118,9 +139,11 @@ class TextProcessor(DataProcessor):
         if isinstance(data, list):
             for section in data:
                 self.storage.append(section)
+                self.ft_input()
             return
         print(data, "is added")
         self.storage.append(data)
+        self.ft_input()
         return
 
     def show_storage(self) -> None:
@@ -148,6 +171,7 @@ class LogProcessor(DataProcessor):
                     return (False)
                 if isinstance(section, dict):
                     result = self.validate(section)
+                    self.ft_input()
                     if result is False:
                         return (False)
             return (True)
@@ -160,16 +184,30 @@ class LogProcessor(DataProcessor):
             for section in data:
                 for value in section.values():
                     self.storage.append(value)
+                    self.ft_input()
             return
-        print(data, "is added")
         for section in data.values():
             self.storage.append(section)
+            self.ft_input()
         return
 
         pass
 
     def show_storage(self) -> None:
         print(self.storage)
+
+
+class CSVExportPlugin:
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        print("CSV Output:")
+        print(",".join(value for _, value in data))
+
+
+class JSONExportPlugin:
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        pairs = [f'"item_{rank}": "{value}"' for rank, value in data]
+        print("JSON Output:")
+        print("{" + ", ".join(pairs) + "}")
 
 
 def main() -> int:
@@ -183,9 +221,10 @@ def main() -> int:
     big5 = [1, 2, 43, True, 14]
     big6 = ["obama", "osama", "kirkbama"]
     big7 = ["obama", "osama", 13]
+    big8 = [big4, big2, big, big6]
     match test_mode:
         case 1:
-            action = input("add NumericProcessor?(Yes/No?)").strip().lower()
+            action: Any = input("add NumericProcessor?(Yes/No?)").lower()
             if action in {"yes", "y"}:
                 stream = DataStream()
                 stream.register_processor(NumericProcessor())
@@ -197,17 +236,8 @@ def main() -> int:
                 stream.process_stream(big5)
                 stream.process_stream(big6)
                 stream.process_stream(big7)
+                stream.process_stream(big8)
                 stream.print_processors_stats()
-            action = input("print output?(Yes/No?)").strip().lower()
-            if action in {"yes", "y"}:
-                for i in range(13):
-                    result = stream.processor_list[0].output()
-                    print(result)
-                action = input("keep outputting?(Yes/No?)").strip().lower()
-                if action in {"yes", "y"}:
-                    for i in range(13):
-                        result = stream.processor_list[0].output()
-                        print(result)
             action = input("add TextProcessor?(Yes/No?)").strip().lower()
             if action in {"yes", "y"}:
                 stream.register_processor(TextProcessor())
@@ -219,16 +249,7 @@ def main() -> int:
                 stream.process_stream(big5)
                 stream.process_stream(big6)
                 stream.process_stream(big7)
-                action = input("print outputting?(Yes/No?)").strip().lower()
-                if action in {"yes", "y"}:
-                    for i in range(13):
-                        result = stream.processor_list[1].output()
-                        print(result)
-                    action = input("keep outputting?(Yes/No?)").lower()
-                    if action in {"yes", "y"}:
-                        for i in range(13):
-                            result = stream.processor_list[1].output()
-                            print(result)
+                stream.print_processors_stats()
             action = input("add LogProcessor?(Yes/No?)").strip().lower()
             if action in {"yes", "y"}:
                 people = [
@@ -244,29 +265,38 @@ def main() -> int:
                     {"name": "Charlie", "age": "35", "city": "Paris"},
                         ]
                 stream.process_stream(people_2)
+                '''
                 people_3 = {"input_1": "test", "input_2": "test",
                             "input_3": "test", "input_4": "test",
                             "input_5": "test", "input_6": "test",
                             "input_7": "test", "input_8": "test"}
-#                stream.process_stream(people_3)
+                stream.process_stream(people_3)
                 people_4 = {"input_1": "test", "input_2": "test",
                             "input_3": "test", "input_4": "test",
                             "input_5": "test", "input_6": "test",
                             "input_7": "test", "input_8": 1}
-#                stream.process_stream(people_4)
+                stream.process_stream(people_4)
+                '''
                 stream.process_stream(big)
                 stream.process_stream(big1)
                 stream.process_stream(big2)
-                action = input("print outputting?(Yes/No?)").strip().lower()
+                stream.print_processors_stats()
+            while 1:
+                action = input("print output?(Yes/No?)").strip().lower()
                 if action in {"yes", "y"}:
-                    for i in range(13):
-                        result = stream.processor_list[2].output()
-                        print(result)
-                    action = input("keep outputting?(Yes/No?)").lower()
-                    if action in {"yes", "y"}:
-                        for i in range(13):
-                            result = stream.processor_list[2].output()
-                            print(result)
+                    action = int(input("how many? "))
+                    action2 = int(input("which format? 1.CSV, 2.JSONE? "))
+                    match action2:
+                        case 1:
+                            stream.output_pipeline(action, CSVExportPlugin())
+                            stream.print_processors_stats()
+                        case 2:
+                            stream.output_pipeline(action, JSONExportPlugin())
+                            stream.print_processors_stats()
+                        case _:
+                            pass
+                else:
+                    break
         case _:
             print("no correct case was given")
             return (0)
@@ -274,7 +304,12 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+
+    print("UNSAFE MAIN:")
+    _ = main()
+    '''
     try:
         _ = main()
     except BaseException as e:
         print(e)
+    '''
