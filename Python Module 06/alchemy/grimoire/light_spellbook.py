@@ -10,7 +10,6 @@ def light_spell_record(spell_name: str, ingredients: str) -> str:
     result = validate_ingredients(ingredients)
     if "INVALID" in result:
         spell = "spell rejected: " + spell_name + " " + result
-        return(spell)
-    elif "VALID" in result:
-        spell = "spell recorded: " + spell_name + " " + result
-        return(spell)
+        return (spell)
+    spell = "spell recorded: " + spell_name + " " + result
+    return (spell)

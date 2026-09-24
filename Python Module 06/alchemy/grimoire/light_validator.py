@@ -8,4 +8,4 @@ def validate_ingredients(ingredients: str) -> str:
         verdict = "INVALID"
 
     result = ingredients + " - " + verdict
-    return(result)
+    return (result)

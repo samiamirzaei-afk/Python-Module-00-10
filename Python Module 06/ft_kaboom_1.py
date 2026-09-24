@@ -1,9 +1,9 @@
-import alchemy.grimoire as el
+from alchemy.grimoire.dark_spellbook import dark_spell_record
 
 if __name__ == "__main__":
-    result = el.dark_spell_record("testing", "fire")
+    result = dark_spell_record("testing", "fire")
     print(result)
-    result = el.dark_spell_record("testing", "book")
+    result = dark_spell_record("testing", "book")
     print(result)
-    result = el.dark_spell_record("testing", "frog")
+    result = dark_spell_record("testing", "frog")
     print(result)
