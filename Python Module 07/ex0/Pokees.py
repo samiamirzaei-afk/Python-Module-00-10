@@ -1,25 +1,18 @@
-from abc import ABC, absstractmethod
+from abc import ABC, abstractmethod
+
 
 class Creature(ABC):
     def __init__(self) -> None:
-        self.name = pass
-        self.type = pass
+        self.name: str = ""
+        self.type: str = ""
 
     def describe(self) -> str:
-        result = self.name + " is a " + self.type + " type Creature"
+        result: str = self.name + " is a " + self.type + " type Creature"
         return (result)
 
-    @absstractmethod
-    def attack() -> str:
+    @abstractmethod
+    def attack(self) -> str:
         pass
-
-class CreatureFactory(ABC):
-
-    @absstractmethod
-    def create_base()
-
-    @absstractmethod
-    def create_evolved()
 
 
 class Flameling(Creature):
@@ -28,9 +21,9 @@ class Flameling(Creature):
         self.name = "Flameling"
         self.type = "Fire"
 
-    def attack() -> str:
+    def attack(self) -> str:
         result = self.name + " uses Ember"
-        return(result)
+        return (result)
 
 
 class Pyrodon(Creature):
@@ -39,9 +32,9 @@ class Pyrodon(Creature):
         self.name = "Pyrodon"
         self.type = "Fire/Flying"
 
-    def attack() -> str:
+    def attack(self) -> str:
         result = self.name + " uses Flamethrower"
-        return(result)
+        return (result)
 
 
 class Aquabub(Creature):
@@ -50,9 +43,9 @@ class Aquabub(Creature):
         self.name = "Aquabub"
         self.type = "Water"
 
-    def attack() -> str:
+    def attack(self) -> str:
         result = self.name + " uses Water Gun"
-        return(result)
+        return (result)
 
 
 class Torragon(Creature):
@@ -61,14 +54,6 @@ class Torragon(Creature):
         self.name = "Torragon"
         self.type = "Water"
 
-    def attack() -> str:
+    def attack(self) -> str:
         result = self.name + " uses Hydro Pump"
-        return(result)
-
-
-def main() -> int:
-
-
-
-if __name__ == "__main__":
-    _ = main()
+        return (result)
