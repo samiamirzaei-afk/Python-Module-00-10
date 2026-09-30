@@ -7,22 +7,24 @@ import ex2
 def st_finder(op:tuple[ex0.CreatureFactory, ex2.BattleStrategy]) -> list[str]:
         pokee, pokee_attack = op
         result = []
-        if pokee_attack == ex2.NormalStrategy:
+        if isinstance (pokee_attack,  ex2.NormalStrategy):
             result.append(pokee.describe())
             result.append(pokee.attack())
             return (result)
-        if pokee_attack == ex2.AggressiveStrategy:
-            if isinstance(pokee, TransformCreatureFactory) is False:
-                raise StratError("missmatch type and BattleStrategy")
+        if isinstance(pokee_attack, ex2.AggressiveStrategy):
+            if isinstance(pokee, ex1.TransformCreatureFactory) is False:
+                print(pokee.__class__.__name__, "is not", ex1.HealingCreatureFactory.__name__)
+                raise ex2.StratError("missmatch type and BattleStrategy bob")
             result.append(pokee.describe())
-            temp = pokee.act()
+            temp = pokee_attack.act(pokee)
             result = result + temp
             return (result)
-        if pokee_attack == ex2.NormalStrategy:
-            if isinstance(pokee, HealingCreatureFactory) is False:
-                raise StratError("missmatch type and BattleStrategy")
+        if isinstance (pokee_attack, ex2.DefensiveStrategy):
+            if isinstance(pokee, ex1.HealingCreatureFactory) is False:
+                print(pokee.__class__.__name__, "is not", ex1.HealingCreatureFactory.__name__)
+                raise ex2.StratError("missmatch type and BattleStrategy lol")
             result.append(pokee.describe())
-            temp = pokee.act()
+            temp = pokee_attack.act(pokee)
             result = result + temp
             return (result)
 
@@ -41,8 +43,9 @@ def battle(ops: list[tuple[ex0.CreatureFactory, ex2.BattleStrategy]]) -> int:
             try:
                 pokee1 = st_finder(current)
                 pokee2 = st_finder(fighter)
-            except StratError as e:
+            except ex2.StratError as e:
                 print(e)
+                return (1)
             print(pokee1)
             print(pokee2)
             
@@ -63,7 +66,7 @@ def main() -> int:
     passive = ex2.DefensiveStrategy()
     agro = ex2.AggressiveStrategy()
     battle([(flame, normal),
-                (heal, passive)])
+                (morb_plus, agro)])
     battle([(flame, agro),
                 (heal, passive)])
     battle([(aqua, normal),

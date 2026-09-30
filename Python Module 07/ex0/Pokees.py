@@ -8,7 +8,7 @@ class Creature(ABC):
 
     def describe(self) -> str:
         result: str = self.name + " is a " + self.type + " type Creature"
-        return (result)
+        return result
 
     @abstractmethod
     def attack(self) -> str:
@@ -23,7 +23,7 @@ class Flameling(Creature):
 
     def attack(self) -> str:
         result = self.name + " uses Ember"
-        return (result)
+        return result
 
 
 class Pyrodon(Creature):
@@ -34,7 +34,7 @@ class Pyrodon(Creature):
 
     def attack(self) -> str:
         result = self.name + " uses Flamethrower"
-        return (result)
+        return result
 
 
 class Aquabub(Creature):
@@ -45,7 +45,7 @@ class Aquabub(Creature):
 
     def attack(self) -> str:
         result = self.name + " uses Water Gun"
-        return (result)
+        return result
 
 
 class Torragon(Creature):
@@ -56,4 +56,4 @@ class Torragon(Creature):
 
     def attack(self) -> str:
         result = self.name + " uses Hydro Pump"
-        return (result)
+        return result
