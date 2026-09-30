@@ -23,9 +23,7 @@ class TransformCapability(ABC):
 
 class Sproutling(ex0.Creature, HealCapability):
     def __init__(self) -> None:
-        super().__init__()
-        self.name = "Sproutling"
-        self.type = "Grass"
+        super().__init__("Sproutling", "Grass")
 
     def attack(self) -> str:
         result = self.name + " uses Vine Whip"
@@ -38,9 +36,7 @@ class Sproutling(ex0.Creature, HealCapability):
 
 class Bloomelle(ex0.Creature, HealCapability):
     def __init__(self) -> None:
-        super().__init__()
-        self.name = "Bloomelle"
-        self.type = "Grass/Fairy"
+        super().__init__("Bloomelle", "Grass/Fairy")
 
     def attack(self) -> str:
         result = self.name + "uses Petal Dance"
@@ -51,13 +47,10 @@ class Bloomelle(ex0.Creature, HealCapability):
         return result
 
 
-class Shiftling(TransformCapability, ex0.Creature):
+class Shiftling(ex0.Creature, TransformCapability):
     def __init__(self) -> None:
-        super().__init__()
-        self.name = "Shiftling"
-        self.type = "Normal"
-
-    #       self.trans = False
+        ex0.Creature.__init__(self, "Shiftling", "Normal")
+        TransformCapability.__init__(self)
 
     def attack(self) -> str:
         if self.trans is False:
@@ -79,11 +72,8 @@ class Shiftling(TransformCapability, ex0.Creature):
 
 class Morbius(TransformCapability, ex0.Creature):
     def __init__(self) -> None:
-        super().__init__()
-        self.name = "Morbius"
-        self.type = "normal/morb"
-
-    #        self.morbin_time = False
+        ex0.Creature.__init__(self, "Shiftling", "Normal")
+        TransformCapability.__init__(self)
 
     def attack(self) -> str:
         if self.trans is False:

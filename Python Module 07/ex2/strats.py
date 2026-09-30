@@ -1,5 +1,3 @@
-import ex2
-from autobahn.wamp.gen.wamp.proto.Result import Result
 from typing import Any, cast
 from abc import ABC, abstractmethod
 import ex0
@@ -7,7 +5,7 @@ import ex1
 
 
 class StratError(Exception):
-    def __init__(self, message) -> None:
+    def __init__(self, message: str) -> None:
         if message == "":
             self.message = "missmatch type and BattleStrategy"
         else:
@@ -30,13 +28,11 @@ class HealCreature(ex0.Creature, ex1.HealCapability):
 
 class NormalStrategy(BattleStrategy):
     def is_valid(self, pokee: ex0.Creature) -> bool:
-        if isinstance(pokee, ex0.Creature):
-            return True
-        return False
+        return isinstance(pokee, ex0.Creature)
 
     def act(self, pokee: ex0.Creature) -> list[str]:
         if self.is_valid(pokee) is False:
-            raise (StratError)
+            raise (StratError(""))
         result = []
         result.append(pokee.attack())
         return result
@@ -48,7 +44,7 @@ class AggressiveStrategy(BattleStrategy):
 
     def act(self, pokee: Any) -> list[str]:
         if self.is_valid(pokee) is False:
-            raise (StratError)
+            raise (StratError(""))
         result = []
         result.append(pokee.transform())
         result.append(pokee.attack())
@@ -66,7 +62,7 @@ class DefensiveStrategy(BattleStrategy):
 
     def act(self, pokee: ex0.Creature) -> list[str]:
         if self.is_valid(pokee) is False:
-            raise StratError
+            raise StratError("")
         pokee = cast(HealCreature, pokee)
         result = []
         result.append(pokee.attack())

@@ -1,30 +1,33 @@
 import ex0
 import ex1
+from typing import Any
+
+
+def ft_trans_attack(pokee: Any) -> None:
+    print(pokee.attack())
+    print(pokee.transform())
+    print(pokee.attack())
+    print(pokee.revert())
+
+
+def ft_heal_attack(pokee: Any, target: str) -> None:
+    print(pokee.attack())
+    print(pokee.heal(target))
 
 
 def fac_show(fac: ex0.CreatureFactory) -> None:
-    if isinstance(fac, ex0.CreatureFactory) is False:
-        print(fac, "can't make pokees!")
-        return
-    if isinstance(fac, ex1.TransformCreatureFactory) is True:
+    if isinstance(fac, (ex0.Creature, ex1.TransformCreatureFactory)) is True:
+
         pokee = fac.create_base()
-        print(pokee.attack())
-        print(pokee.transform())
-        print(pokee.attack())
-        print(pokee.revert())
+        ft_trans_attack(pokee)
         print("* evolve *")
         pokee = fac.create_evolved()
-        print(pokee.attack())
-        print(pokee.transform())
-        print(pokee.attack())
-        print(pokee.revert())
+        ft_trans_attack(pokee)
         return
     pokee = fac.create_base()
-    print(pokee.attack())
-    print(pokee.heal("itself"))
+    ft_heal_attack(pokee, "itself")
     pokee = fac.create_evolved()
-    print(pokee.attack())
-    print(pokee.heal("itself and others"))
+    ft_heal_attack(pokee, "itself and others")
     return
 
 
