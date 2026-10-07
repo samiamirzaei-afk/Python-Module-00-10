@@ -11,6 +11,7 @@ task.txt
 task
 a.out
 HIDE*
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
