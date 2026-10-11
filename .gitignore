@@ -1,4 +1,6 @@
 smart_result.txt
+matrix.png
+requirements.txt
 result                                                                             
 spec.txt                                                                                     
 main.py
@@ -12,6 +14,8 @@ task
 a.out
 HIDE*
 .env
+space_v
+*.pfd
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
